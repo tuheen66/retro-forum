@@ -89,7 +89,37 @@ const displayPosts = (posts) => {
 
 
 
+    let count = 0
+    const envelop = document.getElementsByClassName("read")
 
+    for (const read of envelop) {
+
+        read.addEventListener("click", function (e) {
+            count++
+            const readCount = document.getElementById('read-count')
+            readCount.innerText = count
+
+            const postTitle = e.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[1].innerText
+
+            const viewCount = e.target.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].nodeValue
+
+            
+            const readContainer = document.getElementById("mark-read-container")
+
+            const div = document.createElement("div")
+            div.classList = "bg-[#f3f3f4]  p-2 lg:w-[400px]  "
+            div.innerHTML = `
+            <div class=" bg-white flex gap-4 justify-between items-center p-2 rounded-lg
+             ">
+                <h4 class="w-48  font-bold">${postTitle} </h4>
+                <div>
+                    <p><i class="fa-regular fa-eye mr-2"></i><span>${viewCount} </span> </p>
+                </div>
+            </div>
+            `
+            readContainer.appendChild(div)
+        })
+    }
 
 
 }
