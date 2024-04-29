@@ -21,8 +21,6 @@ const loadPost = async () => {
 }
 
 
-
-
 //  display posts in body
 
 const displayPosts = (posts) => {
@@ -87,7 +85,7 @@ const displayPosts = (posts) => {
     })
 
 
-
+    //  mark as read
 
     let count = 0
     const envelop = document.getElementsByClassName("read")
@@ -103,7 +101,7 @@ const displayPosts = (posts) => {
 
             const viewCount = e.target.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].nodeValue
 
-            
+
             const readContainer = document.getElementById("mark-read-container")
 
             const div = document.createElement("div")
@@ -120,15 +118,25 @@ const displayPosts = (posts) => {
             readContainer.appendChild(div)
         })
     }
-
-
 }
 
+// search function
 
+const handleSearch = async () => {
+    loadingSpinner.classList.remove('hidden')
+    const searchText = document.getElementById('search-text').value
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`)
 
+    const data = await res.json()
 
+    const categoryData = data.posts
+    console.log(data.posts);
 
+    displayPosts(categoryData)
 
-    loadPost()
+    document.getElementById('search-text').value = ''
+}
+
+loadPost()
 
 
