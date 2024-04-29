@@ -139,4 +139,59 @@ const handleSearch = async () => {
 
 loadPost()
 
+// latest post
+
+const loadLatestPosts = async () => {
+
+
+    const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/latest-posts")
+    const data = await res.json()
+    // console.log(data)
+
+    displayLatestPosts(data)
+}
+
+
+//  display latest posts
+
+const displayLatestPosts = (data) => {
+
+    const latestPostContainer = document.getElementById("latest-post-container")
+
+    data.forEach(post => {
+
+        const div = document.createElement("div")
+
+        div.classList = "card bg-base-100 shadow-xl border-2 border-gray-200"
+
+        div.innerHTML = `
+    
+                    <figure class="px-8 pt-8">
+                        <img src="${post.cover_image}" alt="Shoes"
+                            class="rounded-xl" />
+                    </figure>
+
+                    <div class="card-body font-mulish  ">
+                        <div class="text-[#12132D99]">
+                            <i class="fa-regular fa-calendar-plus"></i> <span>${post.author.posted_date ? post.author.posted_date : "No Publish Date"} </span>
+                        </div>
+                        <h2 class="card-title font-extrabold text-2xl text-[#12132D]">${post.title} </h2>
+                        <p class="text-[#12132D99]">${post.description} </p>
+                        <div class="flex gap-4 items-center">
+                            <div class="w-16 rounded-full">
+                                <img class="rounded-full"
+                                    src="${post.profile_image}" alt="">
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-xl">${post.author.name} </h4>
+                                <p class="text-[#12132D99]">${post.author.designation ? post.author.designation : "Unknown"} </p>
+
+                            </div>
+                        </div>
+                    </div>
+        `
+        latestPostContainer.appendChild(div)
+    })
+}
+loadLatestPosts()
 
