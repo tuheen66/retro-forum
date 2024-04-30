@@ -74,7 +74,7 @@ const displayPosts = (posts) => {
                                 <p><i class="fa-regular fa-clock mr-4"></i><span>${singlePost.posted_time} </span>min</p>
                             </div>
                             <div class="read bg-[#10B981] rounded-full">
-                                <i class="fa-solid fa-envelope-open p-2 text-white"></i>
+                                <i class="fa-solid fa-envelope-open p-2 text-white cursor-pointer"></i>
                             </div>
                         </div>
 
