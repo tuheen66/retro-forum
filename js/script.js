@@ -123,6 +123,14 @@ const displayPosts = (posts) => {
 // search function
 
 const handleSearch = async () => {
+
+    const readCount = document.getElementById('read-count')
+    readCount.innerText = 0
+
+    const readContainer = document.getElementById("mark-read-container")
+    readContainer.innerHTML = ''
+
+
     loadingSpinner.classList.remove('hidden')
     const searchText = document.getElementById('search-text').value
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`)
@@ -130,11 +138,11 @@ const handleSearch = async () => {
     const data = await res.json()
 
     const categoryData = data.posts
-    console.log(data.posts);
 
     displayPosts(categoryData)
 
     document.getElementById('search-text').value = ''
+
 }
 
 loadPost()
